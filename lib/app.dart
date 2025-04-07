@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_recipe/routes.dart';
-import 'package:food_recipe/utils/theme.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
