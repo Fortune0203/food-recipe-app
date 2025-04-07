@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe/features/authentication/SignUp/sign_up.dart';
-
+import 'package:food_recipe/features/authentication/splashscreen.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
-    signup: (context) => const SignupScreen(),
+    splash: (context) => const SplashScreenPage(),
   };
 
   static String splash = '/';
   static String signup = '/signup';
-
 }
