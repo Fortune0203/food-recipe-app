@@ -7,4 +7,6 @@ class AppColors {
   static const Color secondaryButton = Color(0xFF129575);
   static const Color borderfield = Color(0xFFD9D9D9);
   static const Color hinttext = Color(0xFFD9D9D9);
+  static const Color starColor = Color(0xFFFFAD30);
+  static const Color borderColor = Color(0xFFFFE1B3);
 }
