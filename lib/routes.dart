@@ -6,6 +6,8 @@ import 'package:food_recipe/features/authentication/splashscreen.dart';
 class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreenPage(),
+    signin: (context) => const SignInScreen(),
+    signup: (context) => const SignupScreen(),
   };
 
   static String splash = '/';
