@@ -24,6 +24,8 @@ class MoreOptionsPopup extends StatelessWidget {
           _showSharePopup(context);
         } else if (value == 'Rate Recipe') {
           _showRateRecipePopup(context);
+        } else if (value == 'Review') {
+          Navigator.popAndPushNamed(context, '/review-screen');
         } else if (onItemSelected != null) {
           onItemSelected!(value);
         }
