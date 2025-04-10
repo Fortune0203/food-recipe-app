@@ -3,6 +3,7 @@ import 'package:food_recipe/features/authentication/SignUp/sign_up.dart';
 import 'package:food_recipe/features/authentication/sign_in_page.dart';
 import 'package:food_recipe/features/authentication/splashscreen.dart';
 import 'package:food_recipe/features/ingrident-screen/ingrident_screen.dart';
+import 'package:food_recipe/features/review-screen/review_screen.dart';
 import 'package:food_recipe/features/search-recipe/search_recipe.dart';
 
 class AppRoutes {
@@ -12,6 +13,7 @@ class AppRoutes {
     signup: (context) => const SignupScreen(),
     searchRecipe: (context) => const SearchRecipe(),
     ingredientScreen: (context) => const IngredientScreen(),
+    reviewScreen: (context) => const ReviewScreen(),
   };
 
   static String splash = '/';
@@ -19,4 +21,5 @@ class AppRoutes {
   static String signin = '/signin';
   static String searchRecipe = '/search-recipe';
   static String ingredientScreen = '/ingridient-screen';
+  static String reviewScreen = '/review-screen';
 }
