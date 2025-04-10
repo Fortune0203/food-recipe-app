@@ -44,7 +44,7 @@ class _AppState extends State<App> {
           //   scaffoldBackgroundColor: Colors.black,
           //   canvasColor: MaterialTheme.darkScheme().surface,
           // ),
-          initialRoute: AppRoutes.splash,
+          initialRoute: AppRoutes.bottomnav,
           routes: AppRoutes.routes,
           builder: (context, child) {
             return MediaQuery(
