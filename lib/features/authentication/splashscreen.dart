@@ -29,7 +29,7 @@ class SplashScreenPage extends StatelessWidget {
                 "assets/pngs/name.png",
               ),
             ),
-            Spacer(),
+            const Spacer(),
             const Center(
               child: Column(
                 children: [
