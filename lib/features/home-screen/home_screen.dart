@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: _buildSearchBar(),
@@ -86,7 +85,10 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.pushNamed(context, '/add');
         },
         backgroundColor: AppColors.primaryColor,
-        child: const Icon(Icons.add, color: Colors.white,),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CustomBottomNav(
@@ -117,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildTabController() {
     return SizedBox(
-      height: 50.h, // Fixed height for tab bar
+      height: 50.h,
       child: DefaultTabController(
         length: 6,
         child: Column(
@@ -125,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ButtonsTabBar(
               contentPadding: const EdgeInsets.all(10.0),
               backgroundColor: AppColors.primaryColor,
-              unselectedBackgroundColor: Colors.white,
+              unselectedBackgroundColor: Colors.white24,
               labelStyle: const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
               unselectedLabelStyle: const TextStyle(
@@ -170,29 +172,29 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     ];
 
-return Stack(
-  alignment: Alignment.bottomCenter,
-  children: [
-    Container(
-      height: 220.h,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.only(left: 20.w, top: 30.h),
-        itemCount: recipes.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.only(right: 15.w),
-            child: RecipeShowCard(
-              title: recipes[index]['title']!,
-              time: recipes[index]['time']!,
-              imageAsset: recipes[index]['imageAsset']!,
-            ),
-          );
-        },
-      ),
-    ),
-  ],
-);
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        Container(
+          height: 220.h,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.only(left: 20.w, top: 30.h),
+            itemCount: recipes.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.only(right: 15.w),
+                child: RecipeShowCard(
+                  title: recipes[index]['title']!,
+                  time: recipes[index]['time']!,
+                  imageAsset: recipes[index]['imageAsset']!,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildNewRecipe() {
@@ -203,32 +205,28 @@ return Stack(
           author: "James Milner",
           time: "20 mins",
           imageUrl: "your_image_url_here",
-          authorImageUrl: "author_image_url_here"
-        ),
-        Recipe(
+          authorImageUrl: "author_image_url_here"),
+      Recipe(
           title: "Steak with tomato...",
           rating: 5,
           author: "James Milner",
           time: "20 mins",
           imageUrl: "your_image_url_here",
-          authorImageUrl: "author_image_url_here"
-        ),     
-        Recipe(
+          authorImageUrl: "author_image_url_here"),
+      Recipe(
           title: "Steak with tomato...",
           rating: 5,
           author: "James Milner",
           time: "20 mins",
           imageUrl: "your_image_url_here",
-          authorImageUrl: "author_image_url_here"
-        ),
-      
+          authorImageUrl: "author_image_url_here"),
     ];
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 20.w),
+          padding: EdgeInsets.only(left: 30.w),
           child: Text(
             "New Recipe",
             style: TextStyle(
@@ -242,7 +240,7 @@ return Stack(
           height: 145.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.only(left: 20.w, top: 30), 
+            padding: EdgeInsets.only(left: 30.w, top: 30),
             itemCount: recipeList.length,
             itemBuilder: (context, index) {
               return Padding(

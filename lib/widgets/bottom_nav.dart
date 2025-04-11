@@ -38,6 +38,7 @@ class CustomBottomNav extends StatelessWidget {
             icon: Container(
               padding: const EdgeInsets.all(6),
               child: Icon(
+                size:30,
                 icons[index],
                 color: isSelected
                     ? AppColors.primaryColor
