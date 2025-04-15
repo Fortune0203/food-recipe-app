@@ -63,7 +63,9 @@ class SplashScreenPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 60),
               child: PrimaryButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/signup');
+                },
                 label: "Start Cooking",
               ),
             ),
