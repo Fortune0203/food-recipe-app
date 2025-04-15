@@ -118,7 +118,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 30.0, right: 30),
                     child: PrimaryButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/homescreen');
+                      },
                       label: "Sign Up",
                     ),
                   ),
