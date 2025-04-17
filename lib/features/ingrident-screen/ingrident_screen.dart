@@ -44,7 +44,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
     );
   }
 
-Widget _buildAppBar() {
+  Widget _buildAppBar() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -56,7 +56,9 @@ Widget _buildAppBar() {
         onItemSelected: (value) {
           if (value != 'Share') {}
           if (value != 'Rate Recipe') {}
-          if (value != 'Review') {}
+          if (value != 'Review') {
+            
+          }
           if (value != 'Unsave') {}
           }
       ),  
@@ -212,7 +214,7 @@ Widget _buildAppBar() {
     );
   }
 
-Widget _buildTabSection() {
+  Widget _buildTabSection() {
   return SizedBox(
     height: 400.h,
     child: Column(

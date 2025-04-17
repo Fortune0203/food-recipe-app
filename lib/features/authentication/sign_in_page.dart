@@ -118,8 +118,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 30.0, right: 30),
                     child: PrimaryButton(
-                      onPressed: () {},
-                      label: "Sign Up",
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/homescreen");
+                      },
+                      label: "Sign In",
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -160,11 +162,11 @@ class _SignInScreenState extends State<SignInScreen> {
         const SizedBox(height: 20),
         const Text.rich(
           TextSpan(
-            text: 'Don' 't have an account?',
+            text: "Don't have an account?",
             style: TextStyle(fontSize: 12),
             children: <TextSpan>[
               TextSpan(
-                text: 'Sign In',
+                text: 'Sign Up',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 12,

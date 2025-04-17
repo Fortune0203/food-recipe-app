@@ -14,39 +14,41 @@ class NotificationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildtop(),
+      body: _buildBody(),
     );
   }
 
-  Widget _buildtop() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 20.0),
-            child: Center(
-              child: Text(
-                'Notifications',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+  Widget _buildBody() {
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+          child: Center(
+            child: Text(
+              'Notifications',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          const SizedBox(height: 5),
-          _buildnotificationtab(),
-          _buildtodaytext(),
-          _buildnotificationbody(),
-          _buildyesterdaytext(),
-          _buildnotificationbody2(),
-        ],
-      ),
+        ),
+        _buildNotificationTab(),
+        Expanded(
+          child: ListView(
+            children: [
+              _buildTodayText(),
+              _buildNotificationBody(),
+              _buildYesterdayText(),
+              _buildNotificationBody2(),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildnotificationtab() {
+  Widget _buildNotificationTab() {
     return SizedBox(
       height: 60.h,
       width: double.infinity,
@@ -55,47 +57,46 @@ class NotificationsPage extends StatelessWidget {
         child: Column(
           children: [
             ButtonsTabBar(
-                contentCenter: true,
-                width: 110.w,
-                contentPadding: const EdgeInsets.all(10.0),
-                backgroundColor: AppColors.primaryColor,
-                unselectedBackgroundColor: Colors.white24,
-                labelStyle: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold),
-                unselectedLabelStyle: const TextStyle(
-                    color: AppColors.primaryColor, fontWeight: FontWeight.bold),
-                radius: 12.0.h,
-                tabs: const [
-                  Tab(text: "All"),
-                  Tab(text: "Read"),
-                  Tab(text: "Unread"),
-                ]),
+              contentCenter: true,
+              width: 110.w,
+              contentPadding: const EdgeInsets.all(10.0),
+              backgroundColor: AppColors.primaryColor,
+              unselectedBackgroundColor: Colors.white24,
+              labelStyle: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+              unselectedLabelStyle: const TextStyle(
+                  color: AppColors.primaryColor, fontWeight: FontWeight.bold),
+              radius: 12.0.h,
+              tabs: const [
+                Tab(text: "All"),
+                Tab(text: "Read"),
+                Tab(text: "Unread"),
+              ]),
           ],
         ),
       ),
     );
   }
-}
 
-Widget _buildtodaytext() {
-  return const Center(
-    child: Text(
-      'Today',
-      style: TextStyle(
-        fontSize: 12.0,
-        fontWeight: FontWeight.bold,
-        color: AppColors.black,
+  Widget _buildTodayText() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Center(
+        child: Text(
+          'Today',
+          style: TextStyle(
+            fontSize: 12.0,
+            fontWeight: FontWeight.bold,
+            color: AppColors.black,
+          ),
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-Widget _buildnotificationbody() {
-  return ListView.builder(
-      itemCount: 3,
-      shrinkWrap: true,
-      // physics: NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
+  Widget _buildNotificationBody() {
+    return Column(
+      children: List.generate(3, (index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 7.0),
           child: Container(
@@ -146,28 +147,29 @@ Widget _buildnotificationbody() {
             ),
           ),
         );
-      });
-}
+      }),
+    );
+  }
 
-Widget _buildyesterdaytext() {
-  return const Center(
-    child: Text(
-      'Yesterday',
-      style: TextStyle(
-        fontSize: 12.0,
-        fontWeight: FontWeight.bold,
-        color: AppColors.black,
+  Widget _buildYesterdayText() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Center(
+        child: Text(
+          'Yesterday',
+          style: TextStyle(
+            fontSize: 12.0,
+            fontWeight: FontWeight.bold,
+            color: AppColors.black,
+          ),
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-Widget _buildnotificationbody2() {
-  return ListView.builder(
-      itemCount: 3,
-      shrinkWrap: true,
-      // physics: NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
+  Widget _buildNotificationBody2() {
+    return Column(
+      children: List.generate(3, (index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 7.0),
           child: Container(
@@ -218,5 +220,7 @@ Widget _buildnotificationbody2() {
             ),
           ),
         );
-      });
+      }),
+    );
+  }
 }

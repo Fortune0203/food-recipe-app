@@ -1,6 +1,7 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_recipe/features/profile-screen/profile_screen.dart';
 import 'package:food_recipe/utils/colors.dart';
 
 import '../../widgets/bottom_nav.dart';
@@ -9,6 +10,8 @@ import '../../widgets/recipecard.dart';
 import '../../widgets/recipeshowcard.dart';
 import '../../widgets/search_bar.dart';
 import '../model/recipe.dart';
+import '../notification/notification_page.dart';
+import '../saved-recipes/saved_recipes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,66 +22,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
+  
+  final screens = [
+    const _HomeContent(), 
+    const SavedRecipes(),
+    const NotificationsPage(),
+    const ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Hello Jega',
-                          style: TextStyle(
-                            fontSize: 20.h,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 5.h),
-                        Text(
-                          'What are you cooking today?',
-                          style: TextStyle(
-                            fontSize: 16.h,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Image.asset(
-                      "assets/pngs/Avatar.png",
-                      height: 50.h,
-                      fit: BoxFit.contain,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: _buildSearchBar(),
-              ),
-              SizedBox(height: 20.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: _buildTabController(),
-              ),
-              SizedBox(height: 20.h),
-              _buildRecipeCard(),
-              SizedBox(height: 20.h),
-              _buildNewRecipe(),
-              SizedBox(height: 80.h),
-            ],
-          ),
-        ),
-      ),
+      body: screens[currentIndex], 
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         onPressed: () {
@@ -100,8 +55,71 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+class _HomeContent extends StatelessWidget {
+  const _HomeContent();
 
-  Widget _buildSearchBar() {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Hello Jega',
+                        style: TextStyle(
+                          fontSize: 20.h,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 5.h),
+                      Text(
+                        'What are you cooking today?',
+                        style: TextStyle(
+                          fontSize: 16.h,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Image.asset(
+                    "assets/pngs/Avatar.png",
+                    height: 50.h,
+                    fit: BoxFit.contain,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: _buildSearchBar(context),
+            ),
+            SizedBox(height: 20.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: _buildTabController(context),
+            ),
+            SizedBox(height: 20.h),
+            _buildRecipeCard(context),
+            SizedBox(height: 20.h),
+            _buildNewRecipe(context),
+            SizedBox(height: 80.h),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSearchBar(BuildContext context) {
     return SearchBarFilter(
       hintText: 'Search Recipe',
       onChanged: (query) {
@@ -117,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildTabController() {
+  Widget _buildTabController(BuildContext context) {
     return SizedBox(
       height: 50.h,
       child: DefaultTabController(
@@ -148,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildRecipeCard() {
+  Widget _buildRecipeCard(BuildContext context) {
     final recipes = [
       {
         'title': 'Classic Greek \nSalad',
@@ -197,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildNewRecipe() {
+  Widget _buildNewRecipe(BuildContext context) {
     final List<Recipe> recipeList = [
       Recipe(
           title: "Steak with tomato...",
