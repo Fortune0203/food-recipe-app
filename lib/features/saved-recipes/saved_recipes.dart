@@ -10,7 +10,10 @@ class SavedRecipes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildTop(),
+      body: SingleChildScrollView(
+        child:
+        _buildTop()
+        ),
     );
   }
 }
@@ -21,7 +24,7 @@ Widget _buildTop() {
     children: [
       Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.0.h),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
           child: Text(
             'Saved Recipes',
             style: TextStyle(
@@ -33,7 +36,7 @@ Widget _buildTop() {
       ),
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: List.generate(4, (index) {
+        children: List.generate(7, (index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
             child: _buildRecipeCard(),

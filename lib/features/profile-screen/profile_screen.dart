@@ -4,49 +4,67 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_recipe/utils/colors.dart';
 
+import '../../widgets/more_options_popup.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildtop(),
+      body: _buildBody(),
     );
   }
 
-  Widget _buildtop() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(
-            top: 20.0, bottom: 10.0, right: 20.0, left: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(width: 10.w),
-                const Text(
-                  'Profile',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SvgPicture.asset(
-                  'assets/svgs/ellipse.svg',
-                )
-              ],
-            ),
-            _buildprofileitem(),
-            _buildprofilename(),
-            SizedBox(height: 10.h),
-            _buildprofilebio(),
-            _buildprofiletab(),
-            _buildRecipeCard(),
-          ],
+  Widget _buildBody() {
+    return Column(
+      children: [
+        // Top section with profile info
+        Padding(
+          padding: const EdgeInsets.only(top: 30.0, right: 20.0, left: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildAppBar(),
+              _buildprofileitem(),
+              _buildprofilename(),
+              SizedBox(height: 10.h),
+              _buildprofilebio(),
+              _buildprofiletab(),
+            ],
+          ),
         ),
-      ),
+        
+        // Scrollable recipe cards section
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: _buildRecipeList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAppBar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        SizedBox(width: 10.w),
+        const Text(
+          'Profile',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        MoreOptionsPopup(onItemSelected: (value) {
+          if (value != 'Share') {}
+          if (value != 'Rate Recipe') {}
+          if (value != 'Review') {}
+          if (value != 'Unsave') {}
+        }),
+      ],
     );
   }
 
@@ -57,8 +75,8 @@ class ProfileScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
       child: Row(
         children: [
-          SvgPicture.asset(
-            'assets/svgs/profile_picture.svg',
+          Image.asset(
+            'assets/pngs/profilepicture.png',
           ),
           const SizedBox(width: 20),
           Text.rich(
@@ -130,9 +148,112 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget _buildprofilename() {
+  Widget _buildRecipeList() {
+    return ListView.builder(
+      itemCount: 4,
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 10.0),
+          child: Container(
+            width: 315.w,
+            height: 150.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.r),
+              image: const DecorationImage(
+                image: AssetImage('assets/pngs/card1.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 10.h,
+                  right: 7.w,
+                  child: Container(
+                    width: 37.w,
+                    height: 16.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.borderColor,
+                      border: Border.all(
+                        color: AppColors.borderColor,
+                        width: 2.w,
+                      ),
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: AppColors.starColor,
+                          size: 8.sp,
+                        ),
+                        SizedBox(width: 2.w),
+                        Text(
+                          '4.0',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 8.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 10.h,
+                  left: 10.w,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Spicy Chicken burger with \nfrench fries',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            '\nby Chef John',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(width: 155.w),
+                          SvgPicture.asset('assets/svgs/timer.svg'),
+                          SizedBox(width: 5.w),
+                          Text(
+                            '20 min',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(width: 10.w),
+                          SvgPicture.asset('assets/svgs/saved.svg'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildprofilename() {
   return const Text.rich(
     TextSpan(
       text: 'Afuwape Abiodun\n',
@@ -154,7 +275,7 @@ Widget _buildprofilename() {
   );
 }
 
-Widget _buildprofilebio() {
+  Widget _buildprofilebio() {
   return const Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -187,7 +308,7 @@ Widget _buildprofilebio() {
   );
 }
 
-Widget _buildprofiletab() {
+  Widget _buildprofiletab() {
   return SizedBox(
     height: 60.h,
     width: double.infinity,
@@ -216,109 +337,4 @@ Widget _buildprofiletab() {
     ),
   );
 }
-
-Widget _buildRecipeCard() {
-  return ListView.builder(
-    itemCount: 4,
-    shrinkWrap: true,
-    padding: EdgeInsets.zero,
-    clipBehavior: Clip.none,
-    itemBuilder: (context, index) {
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 10.0),
-        child: Container(
-          width: 315.w,
-          height: 150.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.r),
-            image: const DecorationImage(
-              image: AssetImage('assets/pngs/card1.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                top: 10.h,
-                right: 7.w,
-                child: Container(
-                  width: 37.w,
-                  height: 16.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.borderColor,
-                    border: Border.all(
-                      color: AppColors.borderColor,
-                      width: 2.w,
-                    ),
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.star,
-                        color: AppColors.starColor,
-                        size: 8.sp,
-                      ),
-                      SizedBox(width: 2.w),
-                      Text(
-                        '4.0',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 8.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 10.h,
-                left: 10.w,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Spicy Chicken burger with \nfrench fries',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '\nby Chef John',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        SizedBox(width: 155.w),
-                        SvgPicture.asset('assets/svgs/timer.svg'),
-                        SizedBox(width: 5.w),
-                        Text(
-                          '20 min',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 11.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(width: 10.w),
-                        SvgPicture.asset('assets/svgs/saved.svg'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
 }

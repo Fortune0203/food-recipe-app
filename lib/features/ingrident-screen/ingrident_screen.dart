@@ -44,7 +44,7 @@ class _IngredientScreenState extends State<IngredientScreen> {
     );
   }
 
-Widget _buildAppBar() {
+  Widget _buildAppBar() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -214,7 +214,7 @@ Widget _buildAppBar() {
     );
   }
 
-Widget _buildTabSection() {
+  Widget _buildTabSection() {
   return SizedBox(
     height: 400.h,
     child: Column(
